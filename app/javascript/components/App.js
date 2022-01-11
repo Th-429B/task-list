@@ -1,7 +1,13 @@
-import React from "react";
+import React, { Fragment } from "react";
+import Tasks from "../components/Tasks/Tasks";
 
 const App = () => {
-    return (<div>this is a very very long string</div>);
-}
+	return (
+		<Fragment>
+			<h1>Task List</h1>
+			<Tasks />
+		</Fragment>
+	);
+};
 
-export default App
+export default App;
