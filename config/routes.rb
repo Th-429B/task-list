@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   namespace :api do
-    resources :tasks,
-    resources :tags, only: [:create, :destroy]
+    namespace :v1 do
+      resources :tasks
+      resources :tags, only: [:create, :destroy]
+    end
   end
 
   get '*path', to: 'pages#index', via: :all
