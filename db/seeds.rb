@@ -5,3 +5,33 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+tasks = Task.create([
+    {
+        name: "Do homework",
+        isCompleted: false
+    },
+    {
+        name: "Do Assignment",
+        isCompleted: false
+    },
+    {
+        name: "Revise for test",
+        isCompleted: false
+    },
+    {
+        name: "Watch lecture",
+        isCompleted: false
+    }
+])
+
+tags = Tag.create([
+    {
+        tagName: "Very Important",
+        task: tasks.first
+    },
+    {
+        tagName: "By today",
+        task: tasks.first
+    }
+])
