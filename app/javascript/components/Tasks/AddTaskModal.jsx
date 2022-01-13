@@ -1,45 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 
-const AddTaskModal = () => {
+const AddTaskModal = (props) => {
 
-    // modal
-	const [show, setShow] = useState(false);
+	const [newTaskName, setNewTaskName] = useState();
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
-
+	const handleOnChange = (e) => {
+		console.log(e.target.value);
+		setNewTaskName(e.target.value);
+	};
 
 	return (
-		<Modal show={show} onHide={handleClose}>
+		<Modal show={props.show} onHide={props.onHide}>
 			<Modal.Header closeButton>
-				<Modal.Title>Add a Task!</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				Woohoo, you're reading this text in a modal!
-				<Form>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<Form.Label>Email address</Form.Label>
-						<Form.Control type="email" placeholder="Enter email" />
-						<Form.Text className="text-muted">
-							We'll never share your email with anyone else.
-						</Form.Text>
-					</Form.Group>
-
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" placeholder="Password" />
-					</Form.Group>
-					<Form.Group className="mb-3" controlId="formBasicCheckbox">
-						<Form.Check type="checkbox" label="Check me out" />
-					</Form.Group>
-					<Button variant="primary" type="submit">
-						Submit
-					</Button>
-				</Form>
-			</Modal.Body>
+					<Modal.Title>Add a Task!</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form>
+						<Form.Group className="mb-3" controlId="formAddTask">
+							<Form.Label>Task name</Form.Label>
+							<Form.Control
+								onChange={handleOnChange}
+								type="name"
+								placeholder="Enter task name"
+							/>
+						</Form.Group>
+						<Button
+							onClick={() => props.onClickAddTask(newTaskName)}
+							variant="primary"
+							type="submit"
+						>
+							Submit
+						</Button>
+					</Form>
+				</Modal.Body>
 		</Modal>
 	);
 };
