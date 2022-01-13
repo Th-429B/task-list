@@ -8,20 +8,27 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import AddTaskModal from "./AddTaskModal";
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
 	const [newTaskName, setNewTaskName] = useState();
+	const [tags, setTags] = useState([]);
 
 	useEffect(() => {
 		// get all my tasks
 		// update the tasks if there is change
 		axios
 			.get("/api/v1/tasks.json")
-			.then((res) => setTasks(res.data.data))
+			.then((res) => {
+				setTasks(res.data.data);
+				setTags(res.data.included);
+				// console.log(res.data.included);
+				// console.log("this is the tags", tags);
+			})
 			.catch((res) => console.log(res));
-		console.log("this is the tasks in useEffect",tasks)
-	}, [tasks.length]);
+		// console.log("this is the tasks in useEffect", tasks);
+	}, [tasks.length, tags.length]);
 
 	const styles = {
 		fontWeight: "bold",
@@ -38,74 +45,83 @@ const Tasks = () => {
 
 	const onClickDeleteTask = (id) => {
 		// console.log(tasks)
-		const url = "/api/v1/tasks/" + id
-		axios.delete(url)
-		.then((data) => {
-			console.log("this is the id of the task to be deleted", id)
-			const taskslist = [...tasks]
-			const index = taskslist.findIndex((data) => data.id == id)
-			console.log("this is the index of the tasks to be deleted", index)
-			taskslist.splice(index, 1)
-			console.log("this is the tasklist", taskslist)
-			setTasks([taskslist])
-			console.log("this is the tasks", tasks)
-			// console.log(index)
-		})
-		.catch(data => console.log('Error', data))
-		// const taskslist = [...tasks];
-		
-		// console.log("delete function called")
-	}
-
-	const handleOnChange = (e) => {
-		console.log(e.target.value);
-		setNewTaskName(e.target.value);
+		const url = "/api/v1/tasks/" + id;
+		axios
+			.delete(url)
+			.then((data) => {
+				// console.log("this is the id of the task to be deleted", id)
+				const taskslist = [...tasks];
+				const index = taskslist.findIndex((data) => data.id == id);
+				// console.log("this is the index of the tasks to be deleted", index)
+				taskslist.splice(index, 1);
+				// console.log("this is the tasklist", taskslist)
+				setTasks([taskslist]);
+				// console.log("this is the tasks", tasks)
+				// console.log(index)
+			})
+			.catch((data) => console.log("Error", data));
 	};
 
-	const List = tasks.map((item) => {
-		return <TaskComponent handleDelete={onClickDeleteTask} item={item}></TaskComponent>;
+	const onClickEditTask = (taskName, id) => {
+		console.log("edit function called!");
+		const url = "/api/v1/tasks/" + id;
+		axios
+			.patch(url, { name: taskName })
+			.then((data) => {
+				const taskslist = [...tasks];
+				const index = taskslist.findIndex((data) => data.id == id);
+				taskslist[index].attributes.name = taskName;
+				setTasks(taskslist);
+			})
+			.catch((data) => console.log("Error", data));
+	};
+
+	const onClickChangeStatus = (id, status) => {
+		const url = "/api/v1/tasks/" + id;
+		console.log(status);
+		axios
+			.patch(url, { isCompleted: status })
+			.then((data) => {
+				const taskslist = [...tasks];
+				const index = taskslist.findIndex((data) => data.id == id);
+				taskslist[index].attributes.isCompleted = status;
+				setTasks(taskslist);
+			})
+			.catch((data) => console.log("Error", data));
+	};
+
+	const listTasks = tasks.map((item) => {
+		return (
+			<TaskComponent
+				onClickChangeStatus={onClickChangeStatus}
+				handleDelete={onClickDeleteTask}
+				handleEdit={onClickEditTask}
+				item={item}
+				tags={tags}
+			></TaskComponent>
+		);
 	});
 
-	// modal
-	const [show, setShow] = useState(false);
+	// Add modal
+	const [showAddModal, setShowAddModal] = useState(false);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleCloseAddModal = () => setShowAddModal(false);
+	const handleShowAddModal = () => setShowAddModal(true);
+
+
 
 	return (
 		<Container>
 			<div>This is where the tasks shld go</div>
 			{/* <Button onClick={() => onClickAddTask()}>Add Task</Button> */}
-			<Button onClick={handleShow}>Add Task</Button>
-			<ListGroup>{List}</ListGroup>
+			<Button onClick={handleShowAddModal}>Add Task</Button>
+			<ListGroup>{listTasks}</ListGroup>
 
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Add a Task!</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form>
-						<Form.Group className="mb-3" controlId="formBasicEmail">
-							<Form.Label>Task name</Form.Label>
-							<Form.Control
-								onChange={handleOnChange}
-								type="name"
-								placeholder="Enter task name"
-							/>
-							{/* <Form.Text className="text-muted">
-								We'll never share your email with anyone else.
-							</Form.Text> */}
-						</Form.Group>
-						<Button
-							onClick={() => onClickAddTask(newTaskName)}
-							variant="primary"
-							type="submit"
-						>
-							Submit
-						</Button>
-					</Form>
-				</Modal.Body>
-			</Modal>
+			<AddTaskModal
+				show={showAddModal}
+				onHide={handleCloseAddModal}
+				onClickAddTask={onClickAddTask}
+			></AddTaskModal>
 		</Container>
 	);
 };
