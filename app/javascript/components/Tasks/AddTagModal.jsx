@@ -30,7 +30,7 @@ const AddTagModal = (props) => {
 							/>
 						</Form.Group>
 						<Button
-							onClick={() => props.handleAddTag()}
+							onClick={() => props.handleAddTag(newTagName)}
 							variant="primary"
 							// type="submit"
 						>

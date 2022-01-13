@@ -3,11 +3,7 @@ import axios from "axios";
 import TaskComponent from "./TaskComponent";
 import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 import AddTaskModal from "./AddTaskModal";
 
 const Tasks = () => {
@@ -107,8 +103,6 @@ const Tasks = () => {
 
 	const handleCloseAddModal = () => setShowAddModal(false);
 	const handleShowAddModal = () => setShowAddModal(true);
-
-
 
 	return (
 		<Container>

@@ -56,14 +56,29 @@ const TaskComponent = (props) => {
 		return <Badge>{item.attributes.tagName}</Badge>;
 	});
 
-	const handleAddTag = () => {
+	const handleAddTag = (name) => {
 		axios
-			.post("api/v1/tags", { tagName: "test tag", task_id: id })
+			.post("api/v1/tags", { tagName: name, task_id: id })
 			.then((res) => {
 				setTags([...tags, res.data.data]);
 			});
-			
 	};
+
+	const handleDeleteTag = (id) => {
+		const url = "/api/v1/tags/" + id;
+		axios.delete(url).then((data) => {
+			const taglist = [...tags]
+			const index = taglist.findIndex((data) => data.id == id);
+			// console.log("this is the index of the tasks to be deleted", index)
+			taglist.splice(index, 1);
+			setTags(taglist);
+		});
+	};
+
+	const handleDeleteAllTags = () =>  {
+		console.log(tags);
+		tags.map((item) => {handleDeleteTag(item.id)})
+	}
 
 	const [newTaskName, setNewTaskName] = useState();
 	const [showAddTagModal, setShowAddTagModal] = useState(false);
@@ -98,7 +113,8 @@ const TaskComponent = (props) => {
 				xs={3}
 				className="d-flex justify-content-around align-items-center"
 			>
-				<Button onClick={handleShowAddTagModal}>Add Tags</Button>
+				<Button onClick={handleShowAddTagModal}>+</Button>
+				<Button onClick={handleDeleteAllTags}> -</Button>
 				<Button onClick={handleShowEditModal}>Edit</Button>
 				<Button
 					onClick={() => props.handleDelete(id)}
