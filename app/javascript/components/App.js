@@ -5,7 +5,7 @@ import Tasks from "../components/Tasks/Tasks";
 const App = () => {
 	return (
 		<Fragment>
-			<h1>Task List</h1>
+			<h1 className="d-flex justify-content-center">Task List</h1>
 			<Tasks />
 		</Fragment>
 	);
