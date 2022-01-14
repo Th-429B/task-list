@@ -5,10 +5,12 @@ import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import AddTaskModal from "./AddTaskModal";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Badge from "react-bootstrap/Badge";
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
-	const [newTaskName, setNewTaskName] = useState();
 	const [tags, setTags] = useState([]);
 
 	useEffect(() => {
@@ -106,9 +108,24 @@ const Tasks = () => {
 
 	return (
 		<Container>
-			<div>This is where the tasks shld go</div>
-			{/* <Button onClick={() => onClickAddTask()}>Add Task</Button> */}
-			<Button onClick={handleShowAddModal}>Add Task</Button>
+			<Row>
+				<Col>
+					<Button variant="outline-secondary">Name</Button>{" "}
+					<Button variant="outline-secondary">Status</Button>
+				</Col>
+				<Col xs={2} className="d-flex justify-content-end">
+					<Button onClick={handleShowAddModal}>Add Task</Button>
+				</Col>
+				<Col
+					xs={3}
+					className="d-flex justify-content-around align-items-center"
+				>
+					<Badge bg="secondary">Tag Button</Badge>
+					<Badge bg="secondary">Task Button</Badge>
+				</Col>
+			</Row>
+
+			<p>&nbsp;</p>
 			<ListGroup>{listTasks}</ListGroup>
 
 			<AddTaskModal

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Stack from 'react-bootstrap/Stack'
+import Stack from "react-bootstrap/Stack";
 
 const DeleteTagModal = (props) => {
 	const [newTagName, setNewTagName] = useState();
@@ -28,16 +28,19 @@ const DeleteTagModal = (props) => {
 						/>
 					</Form.Group>
 					<Form.Text id="deleteTagHelpBlock" muted>
-						Enter the name of the tag you want to delete!.
-						Tag names are case sensitive!
+						Enter the name of the tag you want to delete!. Tag names
+						are case sensitive!
 					</Form.Text>
-					<Button
-						onClick={() => props.handleDeleteTag(newTagName)}
-						variant="primary"
-						// type="submit"
-					>
-						Submit
-					</Button>
+					<Stack gap={1}>
+						<Button
+							onClick={() => props.handleDeleteTag(newTagName)}
+							// onClick={props.handleDeleteAllTags}
+							variant="primary"
+							type="submit"
+						>
+							Submit
+						</Button>
+					</Stack>
 				</Form>
 			</Modal.Body>
 		</Modal>

@@ -36,10 +36,6 @@ const EditTaskModal = (props) => {
 					>
 						Submit
 					</Button>
-					<Button onClick={props.handleShowModal} variant="primary">
-						Edit tags
-					</Button>
-
 				</Form>
 			</Modal.Body>
 		</Modal>
