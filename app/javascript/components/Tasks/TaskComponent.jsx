@@ -86,7 +86,6 @@ const TaskComponent = (props) => {
 		props.handleDelete(id);
 	};
 
-	const [newTaskName, setNewTaskName] = useState();
 	const [showAddTagModal, setShowAddTagModal] = useState(false);
 
 	const handleShowAddTagModal = () => {

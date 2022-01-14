@@ -35,10 +35,6 @@ const Tasks = () => {
 			.catch((res) => console.log(res));
 	}, [tasks.length, tags.length]);
 
-	const styles = {
-		fontWeight: "bold",
-	};
-
 	// create a new task
 	const onClickAddTask = (taskName) => {
 		axios
@@ -102,24 +98,6 @@ const Tasks = () => {
 			></TaskComponent>
 		);
 	});
-
-	const sortName = () => {
-		const taskslist = [...tasks];
-		taskslist.sort(function (a, b) {
-			var nameA = a.attributes.name.toUpperCase(); // ignore upper and lowercase
-			var nameB = b.attributes.name.toUpperCase(); // ignore upper and lowercase
-			if (nameA < nameB) {
-				return -1;
-			}
-			if (nameA > nameB) {
-				return 1;
-			}
-
-			// names must be equal
-			return 0;
-		});
-		setTasks(taskslist);
-	};
 
 	return (
 		<Container>
