@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import EditTaskModal from "./EditTaskModal";
 import AddTagModal from "./AddTagModal";
 import axios from "axios";
+import DeleteTagModal from "./DeleteTagModal";
 
 const TaskComponent = (props) => {
 	const [name, setName] = useState();
@@ -64,21 +65,40 @@ const TaskComponent = (props) => {
 			});
 	};
 
-	const handleDeleteTag = (id) => {
+	// const handleDeleteTag = (id) => {
+	// 	const url = "/api/v1/tags/" + id;
+	// 	axios.delete(url).then((data) => {
+	// 		const taglist = [...tags]
+	// 		const index = taglist.findIndex((data) => data.id == id);
+	// 		// console.log("this is the index of the tasks to be deleted", index)
+	// 		taglist.splice(index, 1);
+	// 		setTags(taglist);
+	// 	});
+	// };
+
+	const handleDeleteTag = (name) => {
+		// find the id from name
+		const taglist = [...tags];
+		console.log(taglist);
+		// maybe a method to remove white space here
+		const index = taglist.findIndex(
+			(data) => data.attributes.tagName == name
+		);
+		const id = taglist[index].id;
+		console.log(index);
+		console.log(id);
 		const url = "/api/v1/tags/" + id;
 		axios.delete(url).then((data) => {
-			const taglist = [...tags]
-			const index = taglist.findIndex((data) => data.id == id);
 			// console.log("this is the index of the tasks to be deleted", index)
 			taglist.splice(index, 1);
 			setTags(taglist);
 		});
 	};
 
-	const handleDeleteAllTags = () =>  {
+	const handleDeleteAllTags = () => {
 		console.log(tags);
-		tags.map((item) => {handleDeleteTag(item.id)})
-	}
+		// tags.map((item) => {handleDeleteTag(item.id)})
+	};
 
 	const [newTaskName, setNewTaskName] = useState();
 	const [showAddTagModal, setShowAddTagModal] = useState(false);
@@ -89,6 +109,16 @@ const TaskComponent = (props) => {
 
 	const handleCloseAddTagModal = () => {
 		setShowAddTagModal(false);
+	};
+
+	const [showDeleteTagModal, setShowDeleteTagModal] = useState(false);
+
+	const handleShowDeleteTagModal = () => {
+		setShowDeleteTagModal(true);
+	};
+
+	const handleCloseDeleteTagModal = () => {
+		setShowDeleteTagModal(false);
 	};
 
 	return (
@@ -114,7 +144,8 @@ const TaskComponent = (props) => {
 				className="d-flex justify-content-around align-items-center"
 			>
 				<Button onClick={handleShowAddTagModal}>+</Button>
-				<Button onClick={handleDeleteAllTags}> -</Button>
+				<Button onClick={handleShowDeleteTagModal}> -</Button>
+				{/* <Button onClick={() => handleDeleteTag("test tag")}> -</Button> */}
 				<Button onClick={handleShowEditModal}>Edit</Button>
 				<Button
 					onClick={() => props.handleDelete(id)}
@@ -135,6 +166,11 @@ const TaskComponent = (props) => {
 				onHide={handleCloseAddTagModal}
 				handleAddTag={handleAddTag}
 			></AddTagModal>
+			<DeleteTagModal
+				show={showDeleteTagModal}
+				onHide={handleCloseDeleteTagModal}
+				handleDeleteTag={handleDeleteTag}
+			></DeleteTagModal>
 		</Row>
 	);
 };

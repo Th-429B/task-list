@@ -32,7 +32,7 @@ const AddTagModal = (props) => {
 						<Button
 							onClick={() => props.handleAddTag(newTagName)}
 							variant="primary"
-							// type="submit"
+							type="submit"
 						>
 							Submit
 						</Button>
