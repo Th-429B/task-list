@@ -17,10 +17,33 @@ const TaskComponent = (props) => {
 	const [tags, setTags] = useState([]);
 
 	// Edit modal
+	const [showAddTagModal, setShowAddTagModal] = useState(false);
+	const [showDeleteTagModal, setShowDeleteTagModal] = useState(false);
 	const [showEditModal, setShowEditModal] = useState(false);
 
-	const handleCloseEditModal = () => setShowEditModal(false);
-	const handleShowEditModal = () => setShowEditModal(true);
+	const handleShowAddTagModal = () => {
+		setShowAddTagModal(true);
+	};
+
+	const handleCloseAddTagModal = () => {
+		setShowAddTagModal(false);
+	};
+
+	const handleShowDeleteTagModal = () => {
+		setShowDeleteTagModal(true);
+	};
+
+	const handleCloseDeleteTagModal = () => {
+		setShowDeleteTagModal(false);
+	};
+
+	const handleCloseEditModal = () => {
+		setShowEditModal(false);
+	};
+
+	const handleShowEditModal = () => {
+		setShowEditModal(true);
+	};
 
 	useEffect(() => {
 		setName(props.item.attributes.name);
@@ -51,6 +74,7 @@ const TaskComponent = (props) => {
 		return <Badge bg="info">{item.attributes.tagName}</Badge>;
 	});
 
+	// method calls to backend
 	const handleAddTag = (name) => {
 		axios
 			.post("api/v1/tags", { tagName: name, task_id: id })
@@ -84,26 +108,6 @@ const TaskComponent = (props) => {
 		});
 		setTags([]);
 		props.handleDelete(id);
-	};
-
-	const [showAddTagModal, setShowAddTagModal] = useState(false);
-
-	const handleShowAddTagModal = () => {
-		setShowAddTagModal(true);
-	};
-
-	const handleCloseAddTagModal = () => {
-		setShowAddTagModal(false);
-	};
-
-	const [showDeleteTagModal, setShowDeleteTagModal] = useState(false);
-
-	const handleShowDeleteTagModal = () => {
-		setShowDeleteTagModal(true);
-	};
-
-	const handleCloseDeleteTagModal = () => {
-		setShowDeleteTagModal(false);
 	};
 
 	return (
