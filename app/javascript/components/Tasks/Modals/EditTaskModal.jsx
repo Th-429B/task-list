@@ -3,11 +3,11 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import AddTagModal from "./AddTagModal";
+import Stack from "react-bootstrap/Stack";
+
 
 const EditTaskModal = (props) => {
-
 	const [newTaskName, setNewTaskName] = useState();
-
 
 	const handleOnChange = (e) => {
 		console.log(e.target.value);
@@ -29,15 +29,17 @@ const EditTaskModal = (props) => {
 							placeholder="Enter task name"
 						/>
 					</Form.Group>
-					<Button
-						onClick={() =>
-							props.onClickEditTask(newTaskName, props.taskId)
-						}
-						variant="primary"
-						type="submit"
-					>
-						Submit
-					</Button>
+					<Stack gap={0}>
+						<Button
+							onClick={() =>
+								props.onClickEditTask(newTaskName, props.taskId)
+							}
+							variant="primary"
+							type="submit"
+						>
+							Submit
+						</Button>
+					</Stack>
 				</Form>
 			</Modal.Body>
 		</Modal>
