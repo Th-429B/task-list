@@ -4,10 +4,10 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import EditTaskModal from "./EditTaskModal";
-import AddTagModal from "./AddTagModal";
+import EditTaskModal from "./Modals/EditTaskModal";
+import AddTagModal from "./Modals/AddTagModal";
 import axios from "axios";
-import DeleteTagModal from "./DeleteTagModal";
+import DeleteTagModal from "./Modals/DeleteTagModal";
 
 const TaskComponent = (props) => {
 	const [name, setName] = useState();
@@ -54,7 +54,7 @@ const TaskComponent = (props) => {
 	};
 
 	const listTags = tags.map((item) => {
-		return <Badge>{item.attributes.tagName}</Badge>;
+		return <Badge bg="info">{item.attributes.tagName}</Badge>;
 	});
 
 	const handleAddTag = (name) => {
@@ -143,7 +143,7 @@ const TaskComponent = (props) => {
 				>
 					{name}
 					<Col xs={2}>
-						{listTags}
+						{listTags}{" "}
 						<Badge bg={getPillColor(isCompleted)} pill>
 							{getTaskStatus(isCompleted)}
 						</Badge>

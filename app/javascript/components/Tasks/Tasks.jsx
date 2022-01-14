@@ -4,11 +4,12 @@ import TaskComponent from "./TaskComponent";
 import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
-import AddTaskModal from "./AddTaskModal";
+import AddTaskModal from "./Modals/AddTaskModal";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
-import AddTaskHelp from "./AddTaskHelp";
+import TaskToolTip from "./ToolTips/TaskToolTip";
+import TagToolTip from "./ToolTips/TagToolTip";
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
@@ -131,12 +132,12 @@ const Tasks = () => {
 		<Container>
 			<Row>
 				<Col>
-					<Button variant="outline-primary"
-					disabled
-					>Here are your tasks!</Button>{" "}
+					<Button variant="outline-primary" disabled>
+						Here are your tasks!
+					</Button>{" "}
 				</Col>
 				<Col xs={2} className="d-flex justify-content-end">
-					<Button onClick={handleShowAddModal}>Add a Task</Button>
+					<Button onClick={handleShowAddModal}>Add A Task Here!</Button>
 				</Col>
 				<Col
 					xs={3}
@@ -156,7 +157,13 @@ const Tasks = () => {
 				onClickAddTask={onClickAddTask}
 			></AddTaskModal>
 			<p>&nbsp;</p>
-			<AddTaskHelp/>
+			<Row>
+				<Col xs={3}
+				className="d-flex justify-content-around">
+					<TaskToolTip />
+					<TagToolTip />
+				</Col>
+			</Row>
 		</Container>
 	);
 };
