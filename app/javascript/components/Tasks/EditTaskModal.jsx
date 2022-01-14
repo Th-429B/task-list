@@ -6,6 +6,8 @@ import AddTagModal from "./AddTagModal";
 
 const EditTaskModal = (props) => {
 
+	const [newTaskName, setNewTaskName] = useState();
+
 
 	const handleOnChange = (e) => {
 		console.log(e.target.value);
