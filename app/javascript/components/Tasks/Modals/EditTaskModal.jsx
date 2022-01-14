@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import AddTagModal from "./AddTagModal";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
 import Stack from "react-bootstrap/Stack";
 
 const EditTaskModal = (props) => {

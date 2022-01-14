@@ -1,13 +1,14 @@
-import React, { useEffect, useState, Fragment } from "react";
-import Badge from "react-bootstrap/Badge";
-import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import EditTaskModal from "./Modals/EditTaskModal";
-import AddTagModal from "./Modals/AddTagModal";
 import axios from "axios";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import ListGroup from "react-bootstrap/ListGroup";
+import React, { useEffect, useState, Fragment } from "react";
+import Row from "react-bootstrap/Row";
+
+import AddTagModal from "./Modals/AddTagModal";
 import DeleteTagModal from "./Modals/DeleteTagModal";
+import EditTaskModal from "./Modals/EditTaskModal";
 
 const TaskComponent = (props) => {
 	const [name, setName] = useState();

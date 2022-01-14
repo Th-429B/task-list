@@ -1,18 +1,19 @@
 import axios from "axios";
-import Container from "react-bootstrap/Container";
+import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
+import Row from "react-bootstrap/Row";
 import React, { useEffect, useState } from "react";
 
-import TaskComponent from "./TaskComponent";
 import AddTaskModal from "./Modals/AddTaskModal";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Badge from "react-bootstrap/Badge";
+import TaskComponent from "./TaskComponent";
 import TaskToolTip from "./ToolTips/TaskToolTip";
 import TagToolTip from "./ToolTips/TagToolTip";
 
 const Tasks = () => {
+
 	const [tasks, setTasks] = useState([]);
 	const [tags, setTags] = useState([]);
 
