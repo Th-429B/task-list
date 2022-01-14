@@ -58,7 +58,6 @@ const TaskComponent = (props) => {
 			});
 	};
 
-
 	const handleDeleteTag = (name) => {
 		// find the id from name
 		const taglist = [...tags];

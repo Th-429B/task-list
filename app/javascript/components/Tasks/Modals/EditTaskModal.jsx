@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import AddTagModal from "./AddTagModal";
 import Stack from "react-bootstrap/Stack";
 
-
 const EditTaskModal = (props) => {
 	const [newTaskName, setNewTaskName] = useState();
 

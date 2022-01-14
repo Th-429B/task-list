@@ -4,7 +4,6 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 
-
 const AddTagModal = (props) => {
 	const [newTagName, setNewTagName] = useState();
 

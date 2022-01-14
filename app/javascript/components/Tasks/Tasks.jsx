@@ -15,10 +15,10 @@ import TagToolTip from "./ToolTips/TagToolTip";
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
 	const [tags, setTags] = useState([]);
-	
+
 	// Add modal
 	const [showAddModal, setShowAddModal] = useState(false);
-	
+
 	const handleCloseAddModal = () => setShowAddModal(false);
 	const handleShowAddModal = () => setShowAddModal(true);
 
@@ -53,15 +53,10 @@ const Tasks = () => {
 		axios
 			.delete(url)
 			.then((data) => {
-				// console.log("this is the id of the task to be deleted", id)
 				const taskslist = [...tasks];
 				const index = taskslist.findIndex((data) => data.id == id);
-				// console.log("this is the index of the tasks to be deleted", index)
 				taskslist.splice(index, 1);
-				// console.log("this is the tasklist", taskslist)
 				setTasks([taskslist]);
-				// console.log("this is the tasks", tasks)
-				// console.log(index)
 			})
 			.catch((data) => console.log("Error", data));
 	};
@@ -107,7 +102,6 @@ const Tasks = () => {
 		);
 	});
 
-
 	const sortName = () => {
 		const taskslist = [...tasks];
 		taskslist.sort(function (a, b) {
@@ -124,8 +118,6 @@ const Tasks = () => {
 			return 0;
 		});
 		setTasks(taskslist);
-		console.log(tasks);
-		console.log(taskslist);
 	};
 
 	return (
@@ -137,7 +129,9 @@ const Tasks = () => {
 					</Button>{" "}
 				</Col>
 				<Col xs={2} className="d-flex justify-content-end">
-					<Button onClick={handleShowAddModal}>Add A Task Here!</Button>
+					<Button onClick={handleShowAddModal}>
+						Add A Task Here!
+					</Button>
 				</Col>
 				<Col
 					xs={3}
@@ -148,7 +142,6 @@ const Tasks = () => {
 				</Col>
 			</Row>
 
-			{/* <p>&nbsp;</p> */}
 			<ListGroup>{listTasks}</ListGroup>
 
 			<AddTaskModal
@@ -158,8 +151,7 @@ const Tasks = () => {
 			></AddTaskModal>
 			<p>&nbsp;</p>
 			<Row>
-				<Col xs={3}
-				className="d-flex justify-content-around">
+				<Col xs={3} className="d-flex justify-content-around">
 					<TaskToolTip />
 					<TagToolTip />
 				</Col>
