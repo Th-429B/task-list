@@ -65,7 +65,7 @@ const TaskComponent = (props) => {
 			});
 	};
 
-	// const handleDeleteTag = (id) => {
+	// const handleDeleteTagById = (id) => {
 	// 	const url = "/api/v1/tags/" + id;
 	// 	axios.delete(url).then((data) => {
 	// 		const taglist = [...tags]
@@ -95,9 +95,20 @@ const TaskComponent = (props) => {
 		});
 	};
 
-	const handleDeleteAllTags = () => {
+	const handleDeleteTask = () => {
 		console.log(tags);
 		// tags.map((item) => {handleDeleteTag(item.id)})
+		const tagList = [...tags];
+		tagList.forEach((ele) => {
+			const tagId = ele.id;
+			const url = "/api/v1/tags/" + tagId;
+			axios.delete(url);
+			// .then(() => {
+			// 	props.handleDelete(id);
+			// });
+		});
+		setTags([]);
+		props.handleDelete(id);
 	};
 
 	const [newTaskName, setNewTaskName] = useState();
@@ -145,10 +156,13 @@ const TaskComponent = (props) => {
 			>
 				<Button onClick={handleShowAddTagModal}>+</Button>
 				<Button onClick={handleShowDeleteTagModal}> -</Button>
+				<div className="vr" />
 				{/* <Button onClick={() => handleDeleteTag("test tag")}> -</Button> */}
 				<Button onClick={handleShowEditModal}>Edit</Button>
 				<Button
-					onClick={() => props.handleDelete(id)}
+					onClick={() => {
+						handleDeleteTask();
+					}}
 					variant="danger"
 					type="submit"
 				>
@@ -170,6 +184,7 @@ const TaskComponent = (props) => {
 				show={showDeleteTagModal}
 				onHide={handleCloseDeleteTagModal}
 				handleDeleteTag={handleDeleteTag}
+				handleDeleteAllTags={handleDeleteTask}
 			></DeleteTagModal>
 		</Row>
 	);
