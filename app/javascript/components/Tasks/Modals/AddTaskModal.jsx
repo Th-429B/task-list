@@ -8,7 +8,6 @@ const AddTaskModal = (props) => {
 	const [newTaskName, setNewTaskName] = useState();
 
 	const handleOnChange = (e) => {
-		console.log(e.target.value);
 		setNewTaskName(e.target.value);
 	};
 

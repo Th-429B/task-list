@@ -8,7 +8,6 @@ const DeleteTagModal = (props) => {
 	const [newTagName, setNewTagName] = useState();
 
 	const handleOnChange = (e) => {
-		console.log(e.target.value);
 		setNewTagName(e.target.value);
 	};
 

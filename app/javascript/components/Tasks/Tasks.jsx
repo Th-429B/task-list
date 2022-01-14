@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import TaskComponent from "./TaskComponent";
 import Container from "react-bootstrap/Container";
-import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
+import React, { useEffect, useState } from "react";
+
+import TaskComponent from "./TaskComponent";
 import AddTaskModal from "./Modals/AddTaskModal";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,6 +15,12 @@ import TagToolTip from "./ToolTips/TagToolTip";
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
 	const [tags, setTags] = useState([]);
+	
+	// Add modal
+	const [showAddModal, setShowAddModal] = useState(false);
+	
+	const handleCloseAddModal = () => setShowAddModal(false);
+	const handleShowAddModal = () => setShowAddModal(true);
 
 	useEffect(() => {
 		// get all my tasks
@@ -23,11 +30,8 @@ const Tasks = () => {
 			.then((res) => {
 				setTasks(res.data.data);
 				setTags(res.data.included);
-				// console.log(res.data.included);
-				// console.log("this is the tags", tags);
 			})
 			.catch((res) => console.log(res));
-		// console.log("this is the tasks in useEffect", tasks);
 	}, [tasks.length, tags.length]);
 
 	const styles = {
@@ -43,8 +47,8 @@ const Tasks = () => {
 			});
 	};
 
+	// delete a task
 	const onClickDeleteTask = (id) => {
-		// console.log(tasks)
 		const url = "/api/v1/tasks/" + id;
 		axios
 			.delete(url)
@@ -62,8 +66,8 @@ const Tasks = () => {
 			.catch((data) => console.log("Error", data));
 	};
 
+	// edit a task
 	const onClickEditTask = (taskName, id) => {
-		console.log("edit function called!");
 		const url = "/api/v1/tasks/" + id;
 		axios
 			.patch(url, { name: taskName })
@@ -76,9 +80,9 @@ const Tasks = () => {
 			.catch((data) => console.log("Error", data));
 	};
 
+	// update status
 	const onClickChangeStatus = (id, status) => {
 		const url = "/api/v1/tasks/" + id;
-		console.log(status);
 		axios
 			.patch(url, { isCompleted: status })
 			.then((data) => {
@@ -90,6 +94,7 @@ const Tasks = () => {
 			.catch((data) => console.log("Error", data));
 	};
 
+	// list all tasks
 	const listTasks = tasks.map((item) => {
 		return (
 			<TaskComponent
@@ -102,11 +107,6 @@ const Tasks = () => {
 		);
 	});
 
-	// Add modal
-	const [showAddModal, setShowAddModal] = useState(false);
-
-	const handleCloseAddModal = () => setShowAddModal(false);
-	const handleShowAddModal = () => setShowAddModal(true);
 
 	const sortName = () => {
 		const taskslist = [...tasks];

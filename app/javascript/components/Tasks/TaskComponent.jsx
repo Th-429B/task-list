@@ -22,14 +22,10 @@ const TaskComponent = (props) => {
 	const handleShowEditModal = () => setShowEditModal(true);
 
 	useEffect(() => {
-		// console.log(props.item.relationships.tags.data)
 		setName(props.item.attributes.name);
 		setId(props.item.id);
 		setIsCompleted(props.item.attributes.isCompleted);
-		// setTags(props.item.relationships.tags.data)
-		// console.log("this is the tags i sent to task component", props.tags)
 		setTags(props.tags.filter((task) => task.attributes.task_id == id));
-		// console.log("this is the tags in each task component", tags)
 	}, [name, props.tags.length]);
 
 	const getClassName = (status) => {
@@ -38,9 +34,6 @@ const TaskComponent = (props) => {
 
 	// need to talk to API to update completed status
 	const handleClick = () => {
-		console.log("buttong clicked");
-		console.log(id);
-
 		setIsCompleted(!isCompleted);
 		props.onClickChangeStatus(id, !isCompleted);
 	};
@@ -65,47 +58,29 @@ const TaskComponent = (props) => {
 			});
 	};
 
-	// const handleDeleteTagById = (id) => {
-	// 	const url = "/api/v1/tags/" + id;
-	// 	axios.delete(url).then((data) => {
-	// 		const taglist = [...tags]
-	// 		const index = taglist.findIndex((data) => data.id == id);
-	// 		// console.log("this is the index of the tasks to be deleted", index)
-	// 		taglist.splice(index, 1);
-	// 		setTags(taglist);
-	// 	});
-	// };
 
 	const handleDeleteTag = (name) => {
 		// find the id from name
 		const taglist = [...tags];
-		console.log(taglist);
 		// maybe a method to remove white space here
 		const index = taglist.findIndex(
 			(data) => data.attributes.tagName == name
 		);
 		const id = taglist[index].id;
-		console.log(index);
-		console.log(id);
+
 		const url = "/api/v1/tags/" + id;
 		axios.delete(url).then((data) => {
-			// console.log("this is the index of the tasks to be deleted", index)
 			taglist.splice(index, 1);
 			setTags(taglist);
 		});
 	};
 
 	const handleDeleteTask = () => {
-		console.log(tags);
-		// tags.map((item) => {handleDeleteTag(item.id)})
 		const tagList = [...tags];
 		tagList.forEach((ele) => {
 			const tagId = ele.id;
 			const url = "/api/v1/tags/" + tagId;
 			axios.delete(url);
-			// .then(() => {
-			// 	props.handleDelete(id);
-			// });
 		});
 		setTags([]);
 		props.handleDelete(id);
