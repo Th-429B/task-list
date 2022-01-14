@@ -8,6 +8,7 @@ import AddTaskModal from "./AddTaskModal";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Badge from "react-bootstrap/Badge";
+import AddTaskHelp from "./AddTaskHelp";
 
 const Tasks = () => {
 	const [tasks, setTasks] = useState([]);
@@ -106,15 +107,36 @@ const Tasks = () => {
 	const handleCloseAddModal = () => setShowAddModal(false);
 	const handleShowAddModal = () => setShowAddModal(true);
 
+	const sortName = () => {
+		const taskslist = [...tasks];
+		taskslist.sort(function (a, b) {
+			var nameA = a.attributes.name.toUpperCase(); // ignore upper and lowercase
+			var nameB = b.attributes.name.toUpperCase(); // ignore upper and lowercase
+			if (nameA < nameB) {
+				return -1;
+			}
+			if (nameA > nameB) {
+				return 1;
+			}
+
+			// names must be equal
+			return 0;
+		});
+		setTasks(taskslist);
+		console.log(tasks);
+		console.log(taskslist);
+	};
+
 	return (
 		<Container>
 			<Row>
 				<Col>
-					<Button variant="outline-secondary">Name</Button>{" "}
-					<Button variant="outline-secondary">Status</Button>
+					<Button variant="outline-primary"
+					disabled
+					>Here are your tasks!</Button>{" "}
 				</Col>
 				<Col xs={2} className="d-flex justify-content-end">
-					<Button onClick={handleShowAddModal}>Add Task</Button>
+					<Button onClick={handleShowAddModal}>Add a Task</Button>
 				</Col>
 				<Col
 					xs={3}
@@ -125,7 +147,7 @@ const Tasks = () => {
 				</Col>
 			</Row>
 
-			<p>&nbsp;</p>
+			{/* <p>&nbsp;</p> */}
 			<ListGroup>{listTasks}</ListGroup>
 
 			<AddTaskModal
@@ -133,6 +155,8 @@ const Tasks = () => {
 				onHide={handleCloseAddModal}
 				onClickAddTask={onClickAddTask}
 			></AddTaskModal>
+			<p>&nbsp;</p>
+			<AddTaskHelp/>
 		</Container>
 	);
 };
