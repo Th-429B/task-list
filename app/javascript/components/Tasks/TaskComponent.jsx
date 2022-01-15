@@ -90,13 +90,15 @@ const TaskComponent = (props) => {
 		const index = taglist.findIndex(
 			(data) => data.attributes.tagName == name
 		);
-		const id = taglist[index].id;
+		if (index != -1) {
+			const id = taglist[index].id;
 
-		const url = "/api/v1/tags/" + id;
-		axios.delete(url).then((data) => {
-			taglist.splice(index, 1);
-			setTags(taglist);
-		});
+			const url = "/api/v1/tags/" + id;
+			axios.delete(url).then((data) => {
+				taglist.splice(index, 1);
+				setTags(taglist);
+			});
+		}
 	};
 
 	const handleDeleteTask = () => {
