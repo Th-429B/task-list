@@ -13,7 +13,6 @@ import TaskToolTip from "./ToolTips/TaskToolTip";
 import TagToolTip from "./ToolTips/TagToolTip";
 
 const Tasks = () => {
-
 	const [tasks, setTasks] = useState([]);
 	const [tags, setTags] = useState([]);
 
@@ -50,10 +49,14 @@ const Tasks = () => {
 		axios
 			.delete(url)
 			.then((data) => {
-				const taskslist = [...tasks];
-				const index = taskslist.findIndex((data) => data.id == id);
-				taskslist.splice(index, 1);
-				setTasks([taskslist]);
+				if (tasks.length == 1) {
+					setTasks([]);
+				} else {
+					const taskslist = [...tasks];
+					const index = taskslist.findIndex((data) => data.id == id);
+					taskslist.splice(index, 1);
+					setTasks([taskslist]);
+				}
 			})
 			.catch((data) => console.log("Error", data));
 	};
