@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 document.addEventListener("DOMContentLoaded", () => {
 	ReactDOM.render(
-		<App />,
+		<App/>,
 		document.body.appendChild(document.createElement("div"))
 	);
 });
