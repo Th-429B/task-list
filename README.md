@@ -3,7 +3,8 @@
 Name: Lau Teng Hon <br>
 Matriculation Number: A0217429B
 
-Final write up can be found in tasklist/submission
+Final write up can be found in the [github repo](https://github.com/Th-429B/task-list/blob/master/submission/LauTengHon_A0217429B_FinalWriteup.pdf) <br>
+or in [google drive](https://drive.google.com/file/d/1Nbhj7jQm2AuhejxYUDKqIhBuflWbDxn7/view?usp=sharing)
 
 ## Computing for Voluntary Welfare Organisations (CVWO)
 
