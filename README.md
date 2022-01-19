@@ -3,6 +3,8 @@
 Name: Lau Teng Hon <br>
 Matriculation Number: A0217429B
 
+Final write up can be found in tasklist/submission
+
 ## Computing for Voluntary Welfare Organisations (CVWO)
 
 This is the submission for the CVWO AY2021/22 Assignment: **Riding on Rails**.
