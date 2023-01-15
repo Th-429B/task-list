@@ -16,7 +16,8 @@ It is CRUD application made with Rails as the front end and postgreSQL for the b
 It is also my first web application.
 
 **Update:** Due to recent changes to heroku, the hosted site does not work anymore 
-Try it out [here](https://task-list-th.herokuapp.com/?)
+
+~~Try it out [here](https://task-list-th.herokuapp.com/?)~~
 
 ## Tech Stack used
 
